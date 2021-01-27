@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import placeholderImg from '../../placeholder.png'
+import placeholderImg from '../../assets/images/placeholder.png'
 
 const Movie = ({ imdbID, Poster, Title, Type, Year }) => {
   return (

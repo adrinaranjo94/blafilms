@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 import Movie from '../Movie'
 
-import { ReactComponent as ChevronLeft } from '../../chevron-left.svg'
-import { ReactComponent as ChevronRight } from '../../chevron-right.svg'
+import { ReactComponent as ChevronLeft } from '../../assets/icons/chevron-left.svg'
+import { ReactComponent as ChevronRight } from '../../assets/icons/chevron-right.svg'
 import { checkChevronLeft, checkChevronRight } from '../../utils/movies.utils'
 
 const Movies = ({ searchResult, page, changePage }) => {
