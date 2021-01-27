@@ -8,7 +8,7 @@ import { checkChevronLeft, checkChevronRight } from '../../utils/movies.utils'
 import { ReactComponent as ChevronLeft } from '../../assets/icons/chevron-left.svg'
 import { ReactComponent as ChevronRight } from '../../assets/icons/chevron-right.svg'
 
-const Movies = ({ searchResult, page, changePage }) => {
+const Movies = ({ searchResult, page, searchInput, changePage }) => {
   const handleChangePage = type => {
     switch (type) {
       case 'increment':
@@ -23,7 +23,15 @@ const Movies = ({ searchResult, page, changePage }) => {
     }
   }
   return !searchResult ? (
-    <p>No results yet</p>
+    <div className="search-notification">
+      {searchInput ? (
+        <p>
+          No results with <b>{searchInput}</b>
+        </p>
+      ) : (
+        <p>Find any movie / serie / game on the search bar</p>
+      )}
+    </div>
   ) : (
     <div className="search-results">
       <div className="chevron">
@@ -46,11 +54,16 @@ const Movies = ({ searchResult, page, changePage }) => {
 }
 
 Movies.propTypes = {
-  searchResult: PropTypes.shape({
-    totalResults: PropTypes.string,
-    Search: PropTypes.array,
-    Response: PropTypes.oneOf(['True', 'False']),
-  }),
+  searchResult: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      totalResults: PropTypes.string,
+      Search: PropTypes.array,
+      Response: PropTypes.oneOf(['True', 'False']),
+    }),
+  ]),
+  page: PropTypes.number,
+  changePage: PropTypes.func,
 }
 
 export default Movies

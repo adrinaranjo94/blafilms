@@ -39,6 +39,7 @@ function App() {
       <Movies
         searchResult={searchResult}
         page={searchParams.page}
+        searchInput={searchParams.search}
         changePage={handleChangePage}
       />
     </div>
