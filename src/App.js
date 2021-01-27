@@ -23,9 +23,14 @@ function App() {
     search()
   })
 
+  const handleSubmitSearch = searchInput => {
+    // Find search and reset page to 1
+    console.log(searchInput)
+  }
+
   return (
     <div className="App">
-      <Search />
+      <Search handleSubmit={handleSubmitSearch} />
       <Movies searchResult={searchResult} />
     </div>
   )
