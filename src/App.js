@@ -3,29 +3,30 @@ import './App.css'
 
 import Search from './components/Search'
 import Movies from './components/Movies'
+import { searchMovies } from './services/movies.services'
 
 function App() {
   const [searchResult, setSearchResult] = useState()
+  const [searchParams, setSearchParams] = useState({
+    search: '',
+    page: 1,
+  })
 
   useEffect(() => {
-    const search = async () => {
-      const response = await fetch(
-        'http://www.omdbapi.com/?apikey=a461e386&s=king',
-      )
-
-      const data = await response.json()
-
-      if (!searchResult) {
-        setSearchResult(data)
+    const fetchData = async () => {
+      if (searchParams.search) {
+        setSearchResult(
+          await searchMovies(searchParams.search, searchParams.page),
+        )
       }
     }
 
-    search()
-  })
+    fetchData()
+  }, [searchParams])
 
   const handleSubmitSearch = searchInput => {
     // Find search and reset page to 1
-    console.log(searchInput)
+    setSearchParams({ search: searchInput, page: 1 })
   }
 
   return (
