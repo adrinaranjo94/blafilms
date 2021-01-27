@@ -1,17 +1,34 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ReactComponent as ChevronLeft } from '../../chevron-left.svg'
-import { ReactComponent as ChevronRight } from '../../chevron-right.svg'
 import Movie from '../Movie'
 
-const Movies = ({ searchResult }) => {
+import { ReactComponent as ChevronLeft } from '../../chevron-left.svg'
+import { ReactComponent as ChevronRight } from '../../chevron-right.svg'
+import { checkChevronLeft, checkChevronRight } from '../../utils/movies.utils'
+
+const Movies = ({ searchResult, page, changePage }) => {
+  const handleChangePage = type => {
+    switch (type) {
+      case 'increment':
+        checkChevronRight(page, searchResult.totalResults) &&
+          changePage(page + 1)
+        break
+      case 'decrement':
+        checkChevronLeft(page) && changePage(page - 1)
+        break
+      default:
+        break
+    }
+  }
   return !searchResult ? (
     <p>No results yet</p>
   ) : (
     <div className="search-results">
       <div className="chevron">
-        <ChevronLeft />
+        {checkChevronLeft(page) && (
+          <ChevronLeft onClick={() => handleChangePage('decrement')} />
+        )}
       </div>
       <div className="search-results-list">
         {searchResult.Search.map(result => (
@@ -19,7 +36,9 @@ const Movies = ({ searchResult }) => {
         ))}
       </div>
       <div className="chevron">
-        <ChevronRight />
+        {checkChevronRight(page, searchResult.totalResults) && (
+          <ChevronRight onClick={() => handleChangePage('increment')} />
+        )}
       </div>
     </div>
   )

@@ -29,10 +29,18 @@ function App() {
     setSearchParams({ search: searchInput, page: 1 })
   }
 
+  const handleChangePage = newPage => {
+    setSearchParams(searchParams => ({ ...searchParams, page: newPage }))
+  }
+
   return (
     <div className="App">
       <Search handleSubmit={handleSubmitSearch} />
-      <Movies searchResult={searchResult} />
+      <Movies
+        searchResult={searchResult}
+        page={searchParams.page}
+        changePage={handleChangePage}
+      />
     </div>
   )
 }
