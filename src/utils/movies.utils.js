@@ -1,9 +1,9 @@
-const checkChevronLeft = actualPage => {
+const canDecreasePagination = actualPage => {
   return actualPage > 1
 }
 
-const checkChevronRight = (actualPage, results) => {
-  return Math.ceil(results / 10) > actualPage
+const canIncreasePagination = (actualPage, totalResults) => {
+  return Math.ceil(totalResults / 10) > actualPage
 }
 
-export { checkChevronLeft, checkChevronRight }
+export { canDecreasePagination, canIncreasePagination }
